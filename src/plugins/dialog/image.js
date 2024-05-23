@@ -986,11 +986,15 @@ export default {
         this.plugins.resizing.resetTransform.call(this, contextImage._element);
         this.plugins.image.cancelPercentAttr.call(this);
 
-        contextImage._element.style.maxWidth = '';
-        contextImage._element.style.width = '';
-        contextImage._element.style.height = '';
-        contextImage._cover.style.width = '';
-        contextImage._cover.style.height = '';
+        if (contextImage._element) {
+            contextImage._element.style.maxWidth = '';
+            contextImage._element.style.width = '';
+            contextImage._element.style.height = '';
+        }
+        if (contextImage._cover) {
+            contextImage._cover.style.width = '';
+            contextImage._cover.style.height = '';
+        }
 
         this.plugins.image.setAlign.call(this, null, null, null, null);
         contextImage._element.setAttribute('data-percentage', 'auto,auto');
@@ -1056,10 +1060,14 @@ export default {
     cancelPercentAttr: function () {
         const contextImage = this.context.image;
         
-        contextImage._cover.style.width = '';
-        contextImage._cover.style.height = '';
-        contextImage._container.style.width = '';
-        contextImage._container.style.height = '';
+        if (contextImage._cover) {
+            contextImage._cover.style.width = '';
+            contextImage._cover.style.height = '';
+        }
+        if (contextImage._container) {
+            contextImage._container.style.width = '';
+            contextImage._container.style.height = '';
+        }
 
         this.util.removeClass(contextImage._container, this.context.image._floatClassRegExp);
         this.util.addClass(contextImage._container, '__se__float-' + contextImage._align);
